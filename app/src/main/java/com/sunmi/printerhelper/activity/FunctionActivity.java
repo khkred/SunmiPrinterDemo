@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -19,8 +17,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sunmi.printerhelper.R;
-import com.sunmi.printerhelper.threadhelp.ThreadPoolManager;
-import com.sunmi.printerhelper.utils.BytesUtil;
 import com.sunmi.printerhelper.utils.SunmiPrintHelper;
 
 import sunmi.sunmiui.dialog.DialogCreater;
@@ -36,35 +32,9 @@ public class FunctionActivity extends AppCompatActivity {
     boolean run;
 
     private final DemoDetails[] demos = {
-            new DemoDetails(R.string.function_all, R.drawable.function_all,
-                    AllActivity.class),
-            new DemoDetails(R.string.function_qrcode, R.drawable.function_qr,
-                    QrActivity.class),
-            new DemoDetails(R.string.function_barcode, R.drawable.function_barcode,
-                    BarCodeActivity.class),
             new DemoDetails(R.string.function_text, R.drawable.function_text,
-                    TextActivity.class),
-            new DemoDetails(R.string.function_tab, R.drawable.function_tab,
-                    TableActivity.class),
-            new DemoDetails(R.string.function_pic, R.drawable.function_pic,
-                    BitmapActivity.class),
-            new DemoDetails(R.string.function_multi, R.drawable.function_multi,
-                    null),
-            new DemoDetails(R.string.function_threeline, R.drawable.function_threeline,
-                    null),
-            new DemoDetails(R.string.function_buffer, R.drawable.function_buffer,
-                    BufferActivity.class),
-            new DemoDetails(R.string.function_cash, R.drawable.function_cash,
-                    null),
-            new DemoDetails(R.string.function_lcd, R.drawable.function_lcd,
-                    LcdActivity.class),
-            new DemoDetails(R.string.function_status, R.drawable.function_status,
-                    null),
-            new DemoDetails(R.string.function_blackline, R.drawable.function_blackline,
-                    BlackLabelActivity.class),
-            new DemoDetails(R.string.function_label, R.drawable.function_label,
-                    LabelActivity.class)
-    };
+                    TextActivity.class)
+             };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,111 +97,17 @@ public class FunctionActivity extends AppCompatActivity {
                         if(demoDetails.titleId == R.string.function_status){
                             SunmiPrintHelper.getInstance().showPrinterStatus(FunctionActivity.this);
                         }
-                        if(demoDetails.titleId == R.string.function_multi){
-                            if(mHintOneBtnDialog  == null){
-                                mHintOneBtnDialog = DialogCreater.createHintOneBtnDialog(FunctionActivity.this, null, getResources().getString(R.string.multithread), getResources().getString(R.string.multithread_stop), new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        run = false;
-                                        mHintOneBtnDialog.cancel();
-                                    }
-                                });
-                            }
-                            mHintOneBtnDialog.show();
-                            run = true;
-                            multiPrint();
-                        }
+
                     }
                 });
             }
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.function, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()){
-            case R.id.action_about:
-                showAbout();
-                break;
-            case R.id.action_setting:
-                Intent intent = new Intent(this, SettingActivity.class);
-                startActivity(intent);
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-        return true;
-    }
 
     /**
      * Multi-threaded loop print esc cmd arrays
      */
-    private void multiPrint(){
-        ThreadPoolManager.getInstance().executeTask(new Runnable() {
-            @Override
-            public void run() {
-                while(run){
-                    SunmiPrintHelper.getInstance().sendRawData(BytesUtil.getBaiduTestBytes());
-                    try {
-                        Thread.sleep(4000);
-                    } catch (InterruptedException e) {
-                        break;
-                    }
-                }
-
-
-            }
-        });
-        ThreadPoolManager.getInstance().executeTask(new Runnable() {
-            @Override
-            public void run() {
-                while(run){
-                    SunmiPrintHelper.getInstance().sendRawData(BytesUtil.getKoubeiData());
-                    try {
-                        Thread.sleep(4000);
-                    } catch (InterruptedException e) {
-                        break;
-                    }
-                }
-
-            }
-        });
-        ThreadPoolManager.getInstance().executeTask(new Runnable() {
-            @Override
-            public void run() {
-                while(run){
-                    SunmiPrintHelper.getInstance().sendRawData(BytesUtil.getErlmoData());
-                    try {
-                        Thread.sleep(4000);
-                    } catch (InterruptedException e) {
-                        break;
-                    }
-                }
-
-            }
-        });
-        ThreadPoolManager.getInstance().executeTask(new Runnable() {
-            @Override
-            public void run() {
-                while(run){
-                    SunmiPrintHelper.getInstance().sendRawData(BytesUtil.getMeituanBill());
-                    try {
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e) {
-                        break;
-                    }
-                }
-
-            }
-        });
-    }
 
     /**
      * Show About

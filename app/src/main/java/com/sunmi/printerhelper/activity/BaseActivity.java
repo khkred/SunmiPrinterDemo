@@ -113,42 +113,4 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.hexprint, menu);
-        return true;
-    }
-
-    EditTextDialog mEditTextDialog;
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()){
-            case R.id.action_print:
-                mEditTextDialog = DialogCreater.createEditTextDialog(this,
-                    getResources().getString(R.string.cancel), getResources().getString(R.string.confirm), getResources().getString(R.string.input_order), new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mEditTextDialog.cancel();
-                    }
-                }, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String text = mEditTextDialog.getEditText().getText().toString();
-                        byte[] data = BytesUtil.getBytesFromHexString(text);
-                        if(BluetoothUtil.isBlueToothPrinter){
-                            BluetoothUtil.sendData(data);
-                        }else{
-                            SunmiPrintHelper.getInstance().sendRawData(data);
-                        }
-                        mEditTextDialog.cancel();
-                    }
-                }, null);
-                mEditTextDialog.show();
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-        return true;
-    }
 }

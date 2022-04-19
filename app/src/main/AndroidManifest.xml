@@ -25,37 +25,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.SettingActivity"
-            android:parentActivityName=".activity.FunctionActivity"/>
-        <activity
-            android:name=".activity.PrinterInfoActivity"
-            android:parentActivityName=".activity.SettingActivity"/>
-        <activity
-            android:name=".activity.QrActivity"
-            android:parentActivityName=".activity.FunctionActivity"/>
-        <activity
-            android:name=".activity.BarCodeActivity"
-            android:parentActivityName=".activity.FunctionActivity"/>
+
         <activity
             android:name=".activity.TextActivity"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:parentActivityName=".activity.FunctionActivity"/>
-        <activity android:name=".activity.BitmapActivity"
-            android:parentActivityName=".activity.FunctionActivity"/>
-        <activity android:name=".activity.TableActivity"
-            android:windowSoftInputMode="adjustNothing"
-            android:parentActivityName=".activity.FunctionActivity"/>
-        <activity android:name=".activity.AllActivity"
-            android:parentActivityName=".activity.FunctionActivity"/>
-        <activity android:name=".activity.BufferActivity"
-            android:parentActivityName=".activity.FunctionActivity"/>
-        <activity android:name=".activity.BlackLabelActivity"
-            android:parentActivityName=".activity.FunctionActivity"/>
-        <activity android:name=".activity.LcdActivity"
-            android:parentActivityName=".activity.FunctionActivity"/>
-        <activity android:name=".activity.LabelActivity"
-            android:parentActivityName=".activity.FunctionActivity"/>
+
     </application>
 
 </manifest>
