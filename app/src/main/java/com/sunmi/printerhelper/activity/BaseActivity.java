@@ -2,9 +2,6 @@ package com.sunmi.printerhelper.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -13,12 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sunmi.printerhelper.R;
 import com.sunmi.printerhelper.utils.BluetoothUtil;
-import com.sunmi.printerhelper.utils.BytesUtil;
 import com.sunmi.printerhelper.utils.ESCUtil;
 import com.sunmi.printerhelper.utils.SunmiPrintHelper;
-
-import sunmi.sunmiui.dialog.DialogCreater;
-import sunmi.sunmiui.dialog.EditTextDialog;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
